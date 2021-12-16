@@ -1,0 +1,36 @@
+const  Routes = require('express')
+const router = new Routes()
+const compositionController = require('../controllers/compositionController')
+const professionController = require('../controllers/professionController')
+const typeController = require('../controllers/typeController')
+const countryController = require('../controllers/countryController')
+const genreController = require('../controllers/genreController')
+const reviewController = require('../controllers/reviewController')
+const ratingController = require('../controllers/ratingController')
+const humanController = require('../controllers/humanController')
+const checkRole = require('../middleware/checkRoleMiddleware')
+
+router.post('/',compositionController.creat)
+router.get('/',compositionController.getAll)
+router.get('/:id',compositionController.getOneComposition)
+router.put('/',compositionController.update)
+router.delete('/:id',compositionController.deleteOne)
+
+router.get('/:id/allProfession',professionController.getAllProfession)
+router.get('/:id/type',typeController.getCompositionType)
+router.get('/:id/country',countryController.getCompositionCountry)
+router.get('/:id/genre',genreController.getCompositionGenre)
+router.get('/:id/human',humanController.getCompositionHuman)
+router.get('/:id/allReview',reviewController.getAllCompositionReview)
+
+router.get('/review/:compositionId/:userId',reviewController.getOneReview)
+router.post('/:id/creatReview',reviewController.creatReview)
+router.put('/:id/updateReview',reviewController.updateReview)
+router.delete('/:id/deleteReview',reviewController.deleteReview)
+
+router.get('/rating/:compositionId/:userId',ratingController.getOneRating)
+router.post('/:id/creatRating',ratingController.creatRating)
+router.put('/:id/updateRating',ratingController.updateRating)
+router.delete('/:id/deleteRating',ratingController.deleteRating)
+
+module.exports = router
