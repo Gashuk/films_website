@@ -1,7 +1,7 @@
 const Routes = require('express')
 const router = new Routes()
-const GenreController = require('../controllers/GenreController')
-const List_genreController = require('../controllers/List_genreController')
+const GenreController = require('../controllers/genreController')
+const List_genreController = require('../controllers/list_genreController')
 
 router.post('/',GenreController.creat)
 router.get('/',GenreController.getAll)

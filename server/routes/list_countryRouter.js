@@ -1,6 +1,6 @@
 const Routes = require('express')
 const router = new Routes()
-const List_countryController = require('../controllers/List_countryController')
+const List_countryController = require('../controllers/list_countryController')
 
 router.post('/',List_countryController.creat)
 router.get('/',List_countryController.getAll)

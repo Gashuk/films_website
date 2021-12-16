@@ -1,6 +1,6 @@
 const Routes = require('express')
 const router = new Routes()
-const RatingController = require('../controllers/RatingController')
+const RatingController = require('../controllers/ratingController')
 
 router.post('/',RatingController.creatRating)
 router.get('/:id',RatingController.getAll)

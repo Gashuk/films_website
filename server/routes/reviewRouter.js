@@ -1,6 +1,6 @@
 const Routes = require('express')
 const router = new Routes()
-const ReviewController = require('../controllers/ReviewController')
+const ReviewController = require('../controllers/reviewController')
 
 router.post('/',ReviewController.creatReview)
 router.get('/:id',ReviewController.getAll)
