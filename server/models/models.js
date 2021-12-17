@@ -7,7 +7,7 @@ const User = sequelize.define('user',{
     img:{type: DataTypes.STRING},
     email: {type: DataTypes.STRING, unique: true, allowNull:false},
     password: {type: DataTypes.STRING},
-    role: {type: DataTypes.STRING, defaultValue: "USER"}
+    role: {type: DataTypes.STRING, defaultValue: "ADMIN"}
 })
 
 const Profession = sequelize.define('profession',{
