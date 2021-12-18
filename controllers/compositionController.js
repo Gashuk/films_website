@@ -224,6 +224,38 @@ class CompositionController {
         else if(typeId != null && genreId == null)
         {
             const all_Composition_genre_type = await Composition.findAll({where:{typeId: typeId}})
+            const new_el_all_Composition = []
+            for (const el_all_Composition of all_Composition_genre_type.rows)
+            {
+                const {id, description,img,year1, year2,number_seasons,rating,createdAt,updatedAt,typeId} = el_all_Composition
+                const all_rating = await Rating.findAll({where:{compositionId: id}})
+                const count_all_Composition = await Rating.findAndCountAll({where:{compositionId: id}})
+
+                let sum_rating = 0
+                for(const el_all_rating of all_rating)
+                {
+                    const {rate}= el_all_rating
+                    sum_rating += rate
+                }
+                const new_rate = `${sum_rating / count_all_Composition.count * 10}`.substring(0, 4)
+                const one_type = await Type.findOne({where:{id: typeId}})
+                const {name} = one_type
+                const new_one_composition = {
+                    "id": id,
+                    "name": el_all_Composition.name,
+                    "img":img,
+                    "description":description,
+                    "year1":year1,
+                    "year2": year2,
+                    "number_seasons": number_seasons,
+                    "rating": new_rate,
+                    "createdAt": createdAt,
+                    "updatedAt": updatedAt,
+                    "typeId":typeId,
+                    "name_type": name
+                }
+                new_el_all_Composition.push(new_one_composition)
+            }
             const itog= {
                 "count": all_Composition.count,
                 "rows":all_Composition_genre_type
@@ -238,7 +270,35 @@ class CompositionController {
             {
                 const {compositionId} = el_all_Genre
                 const one_composition = await Composition.findOne({where:{id: compositionId}})
-                all_Composition_genre_type.push(one_composition)
+
+                const {id, description,img,year1, year2,number_seasons,rating,createdAt,updatedAt,typeId} = one_composition
+                const all_rating = await Rating.findAll({where:{compositionId: id}})
+                const count_all_Composition = await Rating.findAndCountAll({where:{compositionId: id}})
+
+                let sum_rating = 0
+                for(const el_all_rating of all_rating)
+                {
+                    const {rate}= el_all_rating
+                    sum_rating += rate
+                }
+                const new_rate = `${sum_rating / count_all_Composition.count * 10}`.substring(0, 4)
+                const one_type = await Type.findOne({where:{id: typeId}})
+                const {name} = one_type
+                const new_one_composition = {
+                    "id": id,
+                    "name": el_all_Composition.name,
+                    "img":img,
+                    "description":description,
+                    "year1":year1,
+                    "year2": year2,
+                    "number_seasons": number_seasons,
+                    "rating": new_rate,
+                    "createdAt": createdAt,
+                    "updatedAt": updatedAt,
+                    "typeId":typeId,
+                    "name_type": name
+                }
+                all_Composition_genre_type.push(new_one_composition)
             }
             const itog= {
                 "count": all_Composition.count,
@@ -256,7 +316,34 @@ class CompositionController {
                 const one_composition = await Composition.findOne({where:{id: compositionId, typeId: typeId}})
                 if(one_composition != null)
                 {
-                    all_Composition_genre_type.push(one_composition)
+                    const {id, description,img,year1, year2,number_seasons,rating,createdAt,updatedAt,typeId} = one_composition
+                    const all_rating = await Rating.findAll({where:{compositionId: id}})
+                    const count_all_Composition = await Rating.findAndCountAll({where:{compositionId: id}})
+
+                    let sum_rating = 0
+                    for(const el_all_rating of all_rating)
+                    {
+                        const {rate}= el_all_rating
+                        sum_rating += rate
+                    }
+                    const new_rate = `${sum_rating / count_all_Composition.count * 10}`.substring(0, 4)
+                    const one_type = await Type.findOne({where:{id: typeId}})
+                    const {name} = one_type
+                    const new_one_composition = {
+                        "id": id,
+                        "name": el_all_Composition.name,
+                        "img":img,
+                        "description":description,
+                        "year1":year1,
+                        "year2": year2,
+                        "number_seasons": number_seasons,
+                        "rating": new_rate,
+                        "createdAt": createdAt,
+                        "updatedAt": updatedAt,
+                        "typeId":typeId,
+                        "name_type": name
+                    }
+                    all_Composition_genre_type.push(new_one_composition)
                 }
 
             }
